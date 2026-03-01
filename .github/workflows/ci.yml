@@ -1,16 +1,41 @@
-name: CI  # This names your workflow (important for badge)
+name: CI  # Workflow name for badge (case-sensitive!)
 
 on:
-  push:  # Runs on code pushes
-    branches: [ main ]  # Change to your default branch if not 'main'
-  workflow_dispatch:  # Lets you manually trigger it from GitHub UI
+  push:  # Auto-run on pushes to main
+    branches: [ main ]
+  workflow_dispatch:  # Manual trigger button in Actions tab
+  schedule:  # Daily at 11 PM IST (6:30 PM UTC; adjust cron if needed)
+    - cron: '30 13 * * *'
 
 jobs:
-  test:
-    runs-on: ubuntu-latest  # Free GitHub runner
+  update:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Grabs your repo files
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Enables push (add repo write perms if needed)
 
-      - name: Run a test
-        run: echo "All good! Tests passed."  # Simple step that always succeeds
+      - name: Daily README update (safe)
+        run: |
+          # Git config for bot commits
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          
+          # Pull remote changes first (rebase avoids conflicts)
+          git pull --rebase origin main
+          
+          # Append daily line
+          echo "$(date): Daily automated update" >> README.md
+          
+          # Commit & push only if changed
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Daily commit: $(date) - Automated by GitHub Action"
+            git push origin main
+          fi
+
+      - name: Basic test echo
+        run: echo "CI passed! Badge stays green."
