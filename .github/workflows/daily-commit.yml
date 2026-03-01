@@ -2,7 +2,7 @@ name: Daily Commit by 24ds3000108@ds.study.iitm.ac.in
 
 on:
   schedule:
-    - cron: '30 18 * * *'  # Daily at 6:30 PM UTC
+    - cron: '30 18 * * *'  # Daily at 6:30 PM UTC (India ~midnight)
   workflow_dispatch:
 
 jobs:
@@ -15,11 +15,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Update by 24ds3000108@ds.study.iitm.ac.in
+      - name: Update by 24ds3000108@ds.study.iitm.ac.in  # Plain email text only
         run: |
           echo "$(date): Daily automated update" >> README.md
+
+      - name: Commit and push
+        run: |
           git config user.name "DevSync Bot"
           git config user.email "24ds3000108@ds.study.iitm.ac.in"
           git add README.md
-          git commit -m "Daily commit: $(date) - Automated by GitHub Action"
+          git commit -m "Daily commit: $(date) - Automated by GitHub Action" || echo "No changes"
           git push
