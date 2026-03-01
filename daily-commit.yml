@@ -1,0 +1,25 @@
+name: Daily Commit by 24ds3000108@ds.study.iitm.ac.in
+
+on:
+  schedule:
+    - cron: '30 18 * * *'  # Runs daily at 6:30 PM UTC (specific time, not wildcards)
+  workflow_dispatch:  # Lets you trigger manually for testing
+
+jobs:
+  daily-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Update by 24ds3000108@ds.study.iitm.ac.in
+        run: |
+          echo "$(date): Daily automated update" >> README.md
+          git config user.name "DevSync Bot"
+          git config user.email "24ds3000108@ds.study.iitm.ac.in"
+          git add README.md
+          git commit -m "Daily commit: $(date) - Automated by GitHub Action"
+          git push
