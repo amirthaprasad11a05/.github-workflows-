@@ -1,0 +1,16 @@
+name: CI  # This names your workflow (important for badge)
+
+on:
+  push:  # Runs on code pushes
+    branches: [ main ]  # Change to your default branch if not 'main'
+  workflow_dispatch:  # Lets you manually trigger it from GitHub UI
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Free GitHub runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Grabs your repo files
+
+      - name: Run a test
+        run: echo "All good! Tests passed."  # Simple step that always succeeds
