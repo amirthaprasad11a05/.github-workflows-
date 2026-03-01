@@ -1,7 +1,14 @@
-Sun Mar  1 17:56:59 UTC 2026: Daily automated update
-Sun Mar  1 17:57:06 UTC 2026: Daily automated update
-Sun Mar  1 17:59:23 UTC 2026: Daily automated update
-Sun Mar  1 18:01:13 UTC 2026: Daily automated update
-Sun Mar  1 18:01:27 UTC 2026: Daily automated update
-Sun Mar  1 18:16:25 UTC 2026: Daily automated update
-Sun Mar  1 18:16:34 UTC 2026: Daily automated update
+![CI](https://github.com/amirthaprasad11a05/.github-workflows-/workflows/CI/badge.svg)
+
+# GitHub Actions Assignment
+
+This repository demonstrates GitHub Actions CI/CD workflow with daily README updates and status badge.
+
+## Features
+- Automated CI on push/manual trigger
+- Daily scheduled README append
+- Green workflow badge above ✓
+
+## Workflow Status
+See [Actions tab](https://github.com/amirthaprasad11a05/.github-workflows-/actions) for run history.
+
