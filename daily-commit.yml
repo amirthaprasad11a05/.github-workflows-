@@ -2,8 +2,8 @@ name: Daily Commit by 24ds3000108@ds.study.iitm.ac.in
 
 on:
   schedule:
-    - cron: '30 18 * * *'  # Runs daily at 6:30 PM UTC (specific time, not wildcards)
-  workflow_dispatch:  # Lets you trigger manually for testing
+    - cron: '30 18 * * *'  # Daily at 6:30 PM UTC
+  workflow_dispatch:
 
 jobs:
   daily-update:
